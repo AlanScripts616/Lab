@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Alan's Lab. Experimentos de código, prototipos y notas de ingeniería." />
+    <title>Alan's Lab</title>
+    <link rel="icon" type="image/png" href="terminal.png">
+
+
+    <!-- Pega en <head> -->
+    <style>
+        .fade-in-safe {
+            opacity: 0;
+            transition: opacity 0.6s ease-out;
+        }
+
+        .fade-in-safe.visible {
+            opacity: 1;
+        }
+    </style>
+
+    <!-- Pega al final del <body> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Todos los elementos visibles excepto canvas y los que tengan clase no-fade
+            const elementos = Array.from(document.querySelectorAll("body *"))
+                .filter(el => el.offsetParent !== null && !el.classList.contains("no-fade"));
+
+            // Aplica clase inicial
+            elementos.forEach(el => el.classList.add("fade-in-safe"));
+
+            // Mezcla aleatoria para cascada
+            const shuffled = elementos.sort(() => Math.random() - 0.5);
+
+            // Aplica animación rápida solo con opacidad
+            shuffled.forEach((el, i) => {
+                setTimeout(() => {
+                    el.classList.add("visible");
+                }, i * 10); // ajusta velocidad
+            });
+        });
+    </script>
+
+
+
+    <!-- Google Fonts: Outfit + Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Prism.js for Syntax Highlighting (Okaidia Theme - Colorful) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="layout-wrapper">
+
+        <!-- COLUMNA IZQUIERDA: Perfil de Laboratorio -->
+        <aside class="sidebar-left">
+            <header class="profile-header">
+                <div class="avatar-container">
+                    <div class="avatar-ring"></div>
+                    <img src="Boy with glasses.jpg" alt="Lab Logo" class="avatar">
+                </div>
+                <h1 class="profile-name">Alan's Lab</h1>
+                <p class="profile-role">Code & Experimentos</p>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    <span>System Online</span>
+                </div>
+            </header>
+
+            <section class="intro-section">
+                <h3 class="nav-title">Diario de Dev</h3>
+                <p class="intro-text">Aquí se compartirán todos mis proyectos personales y escolares.</p>
+            </section>
+
+            <nav class="sidebar-nav">
+                <h3 class="nav-title">Mi bio</h3>
+                <ul class="nav-list blog-list">
+                    <li>
+                        <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        HTML, CSS, JS, TAILWIND.
+                    </li>
+                    <li>
+                        <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                        </svg>
+                        C++, Arduino IDE
+                    </li>
+                    <li>
+                        <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                            </path>
+                        </svg>
+                        Mi Lap: "DELL INSPIRON-15 3535"
+                    </li>
+                </ul>
+            </nav>
+
+            <section class="mini-stats">
+                <div class="stat-item">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Proyectos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">100%</span>
+                    <span class="stat-label">Funcional</span>
+                </div>
+            </section>
+        </aside>
+
+        <!-- CENTRO: Feed de Experimentos -->
+        <main class="content-center">
+            <div class="section-header">
+                <h2>Proyectos de Laboratorio</h2>
+                <div class="filter-tabs">
+                    <button class="tab active">Todo</button>
+                </div>
+            </div>
+
+            <div class="cards-grid">
+
+                <!-- PROYECTO 1: LOGIN -->
+                <article class="project-card" data-card>
+                    <div class="card-media">
+                        <div class="media-overlay"></div>
+                        <img src="https://placehold.co/600x320/101010/a96bff?text=Este+Laboratorio"
+                            alt="Este Laboratio">
+                        <span class="badge">Frontend</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-top">
+                            <h3>Laboratorio De Alan :D</h3>
+                            <div class="tech-stack">
+                                <span>HTML</span><span>CSS</span><span>JS</span><span>Tailwind</span>
+                            </div>
+                        </div>
+                        <p class="card-desc">Laboratorio hecho con HTML, CSS, Tailwind y JS. Es la página en la que
+                            estás actualmente.</p>
+
+                        <div class="card-actions">
+                            <button class="btn-primary btn-open">Ver Código</button>
+                            <button class="btn-icon">↗</button>
+                        </div>
+
+                        <!-- Contenido Expandible (Editor Style) -->
+                        <div class="card-expandable">
+                            <div class="code-editor-window">
+                                <div class="editor-header">
+                                    <div class="window-controls">
+                                        <span class="dot red"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                    </div>
+                                    <span class="filename">Lab.html</span>
+                                    <button class="btn-copy">Copiar</button>
+                                </div>
+                                <pre><code class="language-html">&lt;h1 class="nohay-contenido"&gt;</code></pre>
+                            </div>
+                            <button class="btn-close-card">Cerrar Bloque</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROYECTO 2: API -->
+                <article class="project-card" data-card>
+                    <div class="card-media">
+                        <div class="media-overlay"></div>
+                        <img src="https://placehold.co/600x320/101010/ffb86b?text=CARRITO+ARDUINO" alt="API Node">
+                        <span class="badge warning">Arduino IDE</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-top">
+                            <h3>Carrito Bluetooth</h3>
+                            <div class="tech-stack">
+                                <span>C++</span><span>Arduino IDE</span>
+                            </div>
+                        </div>
+                        <p class="card-desc">Proyecto de carrito controlado por Bluetooth con Arduino. Usa int para
+                            recibir números y mover motores según los comandos, con conexión segura entre puente H,
+                            motoreductores y neumáticos.</p>
+
+
+                        <div class="card-actions">
+                            <button class="btn-primary btn-open">Ver Código</button>
+                            <button class="btn-icon">↗</button>
+                        </div>
+
+                        <div class="card-expandable">
+                            <div class="code-editor-window">
+                                <div class="editor-header">
+                                    <div class="window-controls">
+                                        <span class="dot red"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                    </div>
+                                    <span class="filename">Carrito.ino</span>
+                                    <button class="btn-copy">Copiar</button>
+                                </div>
+                                <pre><code class="language-javascript">app.get("/users", (req, res) => {
+    // Simulación de código.ino (Pronto se pondrá el code del carrito.)
+    const users = [
+        { id: 1, name: "Alan", role: "Admin" },
+        { id: 2, name: "Guest", role: "User" }
+    ];
+    res.json({ ok: true, data: users });
+});</code></pre>
+                            </div>
+                            <button class="btn-close-card">Cerrar Bloque</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROYECTO 3: DASHBOARD -->
+                <article class="project-card" data-card>
+                    <div class="card-media">
+                        <div class="media-overlay"></div>
+                        <img src="https://placehold.co/600x320/101010/ff6b6b?text=Coming+Soon..." alt="Dashboard">
+                        <span class="badge danger">ARDUINO IDE</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-top">
+                            <h3>Coming Soon...</h3>
+                            <div class="tech-stack">
+                                <span>C++</span><span>Arduino IDE</span>
+                            </div>
+                        </div>
+                        <p class="card-desc">Coming Soon...
+                        </p>
+
+                        <div class="card-actions">
+                            <button class="btn-primary btn-open">Ver Código</button>
+                            <button class="btn-icon">↗</button>
+                        </div>
+
+                        <div class="card-expandable">
+                            <div class="code-editor-window">
+                                <div class="editor-header">
+                                    <div class="window-controls">
+                                        <span class="dot red"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                    </div>
+                                    <span class="filename">Script.lua</span>
+                                    <button class="btn-copy">Copiar</button>
+                                </div>
+                                <pre><code class="language-javascript">Coming Soon...</code></pre>
+                            </div>
+                            <button class="btn-close-card">Cerrar Bloque</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </main>
+
+        <!-- COLUMNA DERECHA: Status del Laboratorio -->
+        <aside class="sidebar-right">
+            <div class="tech-widget">
+                <div class="widget-header">
+                    <h4>Lab Status</h4>
+                    <div class="live-indicator">
+                        <span class="blink"></span> ONLINE
+                    </div>
+                </div>
+
+                <!-- CSS 3D SPHERE -->
+                <div class="visualizer-container">
+                    <div class="scene">
+                        <div class="sphere">
+                            <div class="ring r1"></div>
+                            <div class="ring r2"></div>
+                            <div class="ring r3"></div>
+                        </div>
+                    </div>
+                    <div class="scan-line"></div>
+                </div>
+
+                <div class="widget-footer">
+                    <div class="metric">
+                        <span class="label">CPU</span>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 32%"></div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <span class="label">RAM</span>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 58%"></div>
+                        </div>
+                    </div>
+                    <p class="terminal-text">> Compiling assets...<br>> All systems nominal.</p>
+                </div>
+            </div>
+
+            <div class="thank-you-box">
+                <h4>¡Gracias por la visita!</h4>
+                <p>Espero que hayas disfrutado el recorrido por mi laboratorio digital.</p>
+                <div class="heart-icon">❤️</div>
+            </div>
+        </aside>
+
+    </div>
+
+
+
+    <!-- Prism JS for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
