@@ -7,17 +7,11 @@
     <meta name="description" content="Alan's Lab. Experimentos de código, prototipos y notas de ingeniería." />
     <title>Alan's Lab</title>
     <link rel="icon" type="image/png" href="terminal.png">
-
-
     <!-- Pega en <head> -->
     <style>
-        /* Todos los elementos visibles normales empiezan invisibles */
-        body * {
-            opacity: 0;
-        }
-
         .fade-in-safe {
-            transition: opacity 0.6s ease-out;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
         }
 
         .fade-in-safe.visible {
@@ -27,23 +21,26 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Selecciona todos los elementos visibles excepto canvas o los que no quieras animar
+            // Selecciona solo elementos visibles y seguros
             const elementos = Array.from(document.querySelectorAll("body *"))
-                .filter(el => el.offsetParent !== null && !el.classList.contains("no-fade"));
+                .filter(el => el.offsetParent !== null &&
+                    !["CANVAS", "PRE", "CODE", "SVG"].includes(el.tagName));
 
             // Aplica clase de animación
             elementos.forEach(el => el.classList.add("fade-in-safe"));
 
-            // Mezcla aleatoria para la cascada
+            // Mezcla aleatoria para cascada
             const shuffled = elementos.sort(() => Math.random() - 0.5);
 
+            // Aplica animación
             shuffled.forEach((el, i) => {
                 setTimeout(() => {
                     el.classList.add("visible");
-                }, i * 10); // ajusta velocidad de cascada
+                }, i * 14); // ajusta velocidad de cascada
             });
         });
     </script>
+
 
 
 
