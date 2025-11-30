@@ -11,8 +11,12 @@
 
     <!-- Pega en <head> -->
     <style>
-        .fade-in-safe {
+        /* Todos los elementos visibles normales empiezan invisibles */
+        body * {
             opacity: 0;
+        }
+
+        .fade-in-safe {
             transition: opacity 0.6s ease-out;
         }
 
@@ -21,27 +25,26 @@
         }
     </style>
 
-    <!-- Pega al final del <body> -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Todos los elementos visibles excepto canvas y los que tengan clase no-fade
+            // Selecciona todos los elementos visibles excepto canvas o los que no quieras animar
             const elementos = Array.from(document.querySelectorAll("body *"))
                 .filter(el => el.offsetParent !== null && !el.classList.contains("no-fade"));
 
-            // Aplica clase inicial
+            // Aplica clase de animación
             elementos.forEach(el => el.classList.add("fade-in-safe"));
 
-            // Mezcla aleatoria para cascada
+            // Mezcla aleatoria para la cascada
             const shuffled = elementos.sort(() => Math.random() - 0.5);
 
-            // Aplica animación rápida solo con opacidad
             shuffled.forEach((el, i) => {
                 setTimeout(() => {
                     el.classList.add("visible");
-                }, i * 10); // ajusta velocidad
+                }, i * 10); // ajusta velocidad de cascada
             });
         });
     </script>
+
 
 
 
